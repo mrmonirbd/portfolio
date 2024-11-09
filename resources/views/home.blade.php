@@ -71,6 +71,7 @@
             <div class="position-relative d-flex align-items-center justify-content-center">
                 <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">About</h1>
                 <h1 class="position-absolute text-uppercase text-primary">About Me</h1>
+                
             </div>
             <div class="row align-items-center">
                 <div class="col-lg-5 pb-4 pb-lg-0">
@@ -344,7 +345,7 @@
                 <span class="px-3">|</span>
                 <a class="text-white" href="#">Help</a>
             </div>
-            <p class="m-0">&copy; <a class="text-white font-weight-bold" href="#">Domain Name</a>. All Rights Reserved. Designed by <a class="text-white font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
+            <p class="m-0">&copy; <a class="text-white font-weight-bold" href="{{url('/')}}">monir.tech</a>. All Rights Reserved</a>
             </p>
         </div>
     </div>
