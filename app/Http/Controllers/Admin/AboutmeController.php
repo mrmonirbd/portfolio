@@ -47,8 +47,12 @@ class AboutmeController extends Controller
         if($user->profile_pic != null){
             Storage::delete($user->profile_pic);
         }
-        $get_new_file = $request->file('image')->store('images');
-        $user->profile_pic = $get_new_file;
+        // $get_new_file = $request->file('image')->store('images');
+        $get_file = $request->file('image');
+        $imageName = time() . '_thumb.' . $get_file->extension();
+        $get_file->move(public_path('assets/profile/'), $imageName);
+
+        $user->profile_pic =  'assets/profile/' . $imageName;
     }
 
     $user->update($validated);

@@ -48,8 +48,14 @@ class SettingController extends Controller
             if($setting->about_photo != null){
                 Storage::delete($setting->about_photo);
             }
-            $get_new_file = $request->file('image')->store('images');
-            $setting->about_photo = $get_new_file;
+
+            $get_file = $request->file('image');
+            $imageName = time() . '_thumb.' . $get_file->extension();
+            $get_file->move(public_path('assets/setting/'), $imageName);
+
+            // Save only the file path or name to the database
+            $setting->about_photo = 'assets/setting/' . $imageName;
+
         }
         $setting->update($validated);
         return to_route('admin.setting.index')->with('message','Data Updated');

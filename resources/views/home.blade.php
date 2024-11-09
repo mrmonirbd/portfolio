@@ -1,6 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+
+.body-bg {
+    position: fixed;
+    z-index: 99999;
+    pointer-events: none;
+    top: 0;
+    opacity: 1;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-repeat: repeat;
+    background-position: top left;
+    background-image: url(../assets/images/bg-extra.png);
+}
+</style>
+<div class="body-bg"></div>
 
     <!-- Video Modal Start -->
     <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -26,7 +43,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 px-5 pl-lg-0 pb-5 pb-lg-0">
-                    <img class="img-fluid w-100 rounded-circle shadow-sm" src="{{ asset("storage/$user?->profile_pic") }}" alt="">
+                    <img class="img-fluid w-100 rounded-circle shadow-sm" src="{{ asset($user?->profile_pic) }}" alt="">
                 </div>
                 <div class="col-lg-7 text-center text-lg-left">
                     <h3 class="text-white font-weight-normal mb-3">I'm</h3>
@@ -57,7 +74,7 @@
             </div>
             <div class="row align-items-center">
                 <div class="col-lg-5 pb-4 pb-lg-0">
-                    <img class="img-fluid rounded w-100" src="{{ asset("storage/$setting->about_photo") }}" alt="">
+                    <img class="img-fluid rounded w-100" src="{{ asset($setting->about_photo) }}" alt="">
                 </div>
                 <div class="col-lg-7">
                     <h3 class="mb-4">{{ $setting->about_title }}</h3>
@@ -185,23 +202,32 @@
                     <ul class="list-inline mb-4" id="portfolio-flters">
                         <li class="btn btn-sm btn-outline-primary m-1 active"  data-filter="*">All</li>
                         @foreach ($categories as $category)
-                        <li class="btn btn-sm btn-outline-primary m-1" data-filter=".{{$category->name}}">{{ $category->name }}</li>
+                        <li class="btn btn-sm btn-outline-primary m-1" data-filter=".{{ implode('_', explode(' ', $category->name)) }}">{{ $category->name }}</li>
                         @endforeach
+                        @php
+                            // dd( $category->name );
+                        @endphp
                     </ul>
                 </div>
             </div>
             <div class="row portfolio-container">
                 @foreach ($portfolios as $portfolio)
-                <div class="col-lg-4 col-md-6 mb-4 portfolio-item {{$portfolio->category->name }}">
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item {{ implode('_', explode(' ', $portfolio->category->name)) }}">
                     <div class="position-relative overflow-hidden mb-2">
-                        <img class="img-fluid rounded w-100" src="{{ asset("storage/$portfolio->image") }}" alt="">
+                        @php
+                            // dd($portfolio->image);
+                        @endphp
+                        <img class="img-fluid rounded w-100" src="{{ asset("$portfolio->image") }}" alt="">
                         <div class="portfolio-btn bg-primary d-flex align-items-center justify-content-center">
-                            <a href="{{ asset("storage/$portfolio->image") }}" data-lightbox="portfolio">
+                            <a href="{{ asset("storage/app/images/$portfolio->image") }}" data-lightbox="portfolio">
                                 <i class="fa fa-plus text-white" style="font-size: 50px;"></i>
                             </a>
                             <a href="{{ $portfolio->project_url }}" data-lightbox="portfolio">
                                 <i class="fa-solid fa-link text-white" style="margin-left:20px; font-size: 50px;"></i>
                             </a>
+                            <p>{{ $portfolio->title }}</p>
+                            <h1 class="position-absolute text-uppercase text-primary">{{ $portfolio->title }}</h1>
+
                         </div>
                     </div>
                 </div>

@@ -18,24 +18,29 @@
                               <th> # </th>
                               <th> Photo </th>
                               <th> Title </th>
+                              <th> Url </th>
                               <th> Category </th>
                               <th> Manage </th>
                             </tr>
                           </thead>
                           <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
                             @foreach ($portfolios as $portfolio)
                             <tr>
-                              <td> {{ $portfolio -> id }} </td>
-                              <td> <img src="{{ asset("storage/$portfolio->image") }}" alt="image"> </td>
+                              <td> {{ $loop->iteration }} </td>
+                              <td> <img style="width: 200px; height:auto;" src="{{ asset($portfolio->image) }}" alt="image"> </td>
                               {{-- <td> <i class="fab {{ $service -> icon }}"  aria-hidden="true"></i></td> --}}
                               <td> {{ $portfolio -> title }} </td>
+                              <td> {{ $portfolio -> project_url }} </td>
                               <td> {{ $portfolio -> category-> name }} </td>
                               <td> 
                                 <button type="button" class="btn btn-success btn-sm me-1 " onclick="location.href='{{ route('admin.portfolio.edit', $portfolio->id) }}';">Edit</button>
                                   <form type="submit" method="POST" style="display: inline" action="{{ route('admin.portfolio.destroy', $portfolio->id)}}" onsubmit="return confirm('Are you sure?')">
                                     @csrf
                                     @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" style="style="display: inline"">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm" style="display: inline">Delete</button>
                                 </form>
                             </td>
                             </tr>

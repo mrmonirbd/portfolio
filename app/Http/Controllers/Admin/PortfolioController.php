@@ -53,8 +53,12 @@ class PortfolioController extends Controller
         $portfolio->cat_id = $request->cat_id;
 
         if($request->hasfile('image')){
-            $get_file = $request->file('image')->store('images/portfolios');
-            $portfolio->image = $get_file;
+            $get_file = $request->file('image');
+            $imageName = time() . '_thumb.' . $get_file->extension();
+            $get_file->move(public_path('assets/portfolio/'), $imageName);
+
+            // Save only the file path or name to the database
+            $portfolio->image = 'assets/portfolio/' . $imageName;
         }
 
         $portfolio->save();
@@ -96,6 +100,7 @@ class PortfolioController extends Controller
         if($request->hasfile('image')){
             Storage::delete($portfolio->image);
             $get_file = $request->file('image')->store('images/portfolios');
+            dd($get_file);
             $portfolio->image = $get_file;
         }
 
