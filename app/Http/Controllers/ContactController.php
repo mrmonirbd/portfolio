@@ -17,9 +17,9 @@ class ContactController extends Controller
             'email' => 'required|email',
             'content' => 'required|min:4',
         ]);
-        $contact_email = Setting::select('contact_mail')->where('id',1)->first();
+        $contact_email = Setting::select('contact_mail')->where('id',2)->first();
         Mail::to($contact_email->contact_mail)->send(new ContactMail($request->name, $request->email, $request->subject_mail, $request->content));
-        // Mail::to('hjhj@nn.com')->send(new ContactMail($request->name, $request->email, $request->subject_mail, $request->content));
+        // Mail::to('mr.monirbd@gmail.com')->send(new ContactMail($request->name, $request->email, $request->subject_mail, $request->content));
         // Mail::to("zz@xx.com")->send(new ContactMail('nnn','e@z.com','bla bla','bla bla bla bla'));
         return to_route('home')->with('message','Message sent sucessfully !');
     }

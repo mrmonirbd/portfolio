@@ -3,66 +3,35 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Address;
-
 
 class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(
-        public string $name,
-        public string $email,
-        public string $subject_mail,
-        public string $content
-    )
+    public $name;
+    public $email;
+    public $subject;
+    public $content;
+
+    public function __construct($name, $email, $subject, $content)
     {
-        //
+        $this->name = $name;
+        $this->email = $email;
+        $this->subject = $subject;
+        $this->content = $content;
     }
 
-    /**
-     * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
-     */
-    public function envelope()
+    public function build()
     {
-        return new Envelope(
-            subject: $this->subject_mail,
-            from: new Address($this->email, $this->name)          
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
-     */
-    public function content()
-    {
-        return new Content(
-            view: 'mail.contactmail',
-            
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
+        return $this->from(config('mail.from.address'), config('mail.from.name')) // Set From address explicitly
+                    ->subject($this->subject)
+                    ->view('mail.contactmail')
+                    ->with([
+                        'name' => $this->name,
+                        'email' => $this->email,
+                        'content' => $this->content,
+                    ]);
     }
 }
