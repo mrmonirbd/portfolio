@@ -26,6 +26,14 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('import/assets/css/style.css') }}" rel="stylesheet">
+    <style>
+        .swal-footer {
+            text-align: center !important;
+        }
+        .swal-text {
+            text-align: center !important;
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="51">
@@ -74,6 +82,41 @@
 
        <!-- Template Javascript -->
        <script src="{{ asset('import/assets/js/main.js') }}"></script>
-   </body>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+       <script type="text/javascript">
+           @if ($errors->any())
+                   swal({
+                       icon: "error",
+                       title:"Ooops",
+                       text: "@php echo implode("<br>", $errors->all()) @endphp",
+                   }).then(function() {window.location.reload(window.location.href);});
+               @endif
+   
+               @if(session('success'))
+                   swal({
+                       
+                       title:"Thank you!",
+                       text: "@php echo session('success') @endphp",
+                       icon: "success"
+                   }).then(function() {window.location.reload(window.location.href);});
+               @endif
+   
+               @if(session('info'))
+                   swal({
+                       title:"Notice",
+                       text: "@php echo session('info') @endphp",
+                       icon: "info"
+                   }).then(function() {window.location.reload(window.location.href);});
+               @endif
+               @if(session('error'))
+                   swal({
+                       title:"error",
+                       text: "@php echo session('error') @endphp",
+                       icon: "error",
+                   }).then(function() {window.location.reload(window.location.href);});
+               @endif
+       </script>
+<script src="https://hcaptcha.com/1/api.js" async defer></script>   </body>
 
    </html>

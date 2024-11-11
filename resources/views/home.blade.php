@@ -16,8 +16,14 @@
     background-position: top left;
     background-image: url(../assets/images/bg-extra.png);
 }
+.top_section{
+    background-color: #001c15;
+}
+.education{
+    background-color: #28ac8b;
+}
 </style>
-<div class="body-bg"></div>
+{{-- <div class="body-bg"></div> --}}
 
     <!-- Video Modal Start -->
     <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -39,25 +45,26 @@
 
 
     <!-- Header Start -->
-    <div class="container-fluid bg-primary d-flex align-items-center mb-5 py-5" id="home" style="min-height: 100vh;">
+    <div class="container-fluid  d-flex align-items-center mb-5 py-5 top_section" id="home" style="min-height: 100vh;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5 px-5 pl-lg-0 pb-5 pb-lg-0">
-                    <img class="img-fluid w-100 rounded-circle shadow-sm" src="{{ asset($user?->profile_pic) }}" alt="">
-                </div>
+               
                 <div class="col-lg-7 text-center text-lg-left">
                     <h3 class="text-white font-weight-normal mb-3">I'm</h3>
                     <h1 class="display-3 text-uppercase text-primary mb-2" style="-webkit-text-stroke: 2px #ffffff;">{{ $user?->name }}</h1>
                     <h1 class="typed-text-output d-inline font-weight-lighter text-white"></h1>
                     <div class="typed-text d-none">{{ $user?->job }}</div>
                     <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
-                        <a href="{{ $setting->cv_url }}" class="btn btn-outline-light mr-5">Download CV</a>
+                        <a href="{{ asset('assets/profile/Monir_CV.pdf') }}" target="blank" class="btn btn-outline-light mr-5">Download CV</a>
                         <button type="button" class="btn-play" data-toggle="modal"
                             data-src="{{$setting->video_url }}" data-target="#videoModal">
                             <span></span>
                         </button>
                         <h5 class="font-weight-normal text-white m-0 ml-4 d-none d-sm-block">Play Video</h5>
                     </div>
+                </div>
+                <div class="col-lg-5 px-5 pl-lg-0 pb-5 pb-lg-0">
+                    <img class="img-fluid w-100 rounded-circle shadow-sm" src="{{ asset($user?->profile_pic) }}" alt="">
                 </div>
             </div>
         </div>
@@ -100,10 +107,11 @@
 
 
     <!-- Qualification Start -->
-    <div class="container-fluid py-5" id="qualification">
+    <div class="container-fluid py-5 education" id="qualification">
         <div class="container">
             <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Quality</h1>
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">&nbsp;</h1>
+                {{-- <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Quality</h1> --}}
                 <h1 class="position-absolute text-uppercase text-primary">Education & Expericence</h1>
             </div>
             <div class="row align-items-center">
@@ -143,7 +151,8 @@
     <div class="container-fluid py-5" id="skill">
         <div class="container">
             <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Skills</h1>
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">&nbsp;</h1>
+                {{-- <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Skills</h1> --}}
                 <h1 class="position-absolute text-uppercase text-primary">My Skills</h1>
             </div>
             <div class="row align-items-center">
@@ -169,10 +178,11 @@
 
 
     <!-- Services Start -->
-    <div class="container-fluid pt-5" id="service">
+    <div class="container-fluid pt-5 education" id="service">
         <div class="container">
             <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Service</h1>
+                {{-- <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Service</h1> --}}
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">&nbsp;</h1>
                 <h1 class="position-absolute text-uppercase text-primary">My Services</h1>
             </div>
             <div class="row pb-3">
@@ -195,7 +205,8 @@
     <div class="container-fluid pt-5 pb-3" id="portfolio">
         <div class="container">
             <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Gallery</h1>
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">&nbsp;</h1>
+                {{-- <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Gallery</h1> --}}
                 <h1 class="position-absolute text-uppercase text-primary">My Portfolio</h1>
             </div>
             <div class="row">
@@ -240,7 +251,7 @@
 
 
     <!-- Testimonial Start -->
-    <div class="container-fluid py-5" id="testimonial">
+    {{-- <div class="container-fluid py-5" id="testimonial">
         <div class="container">
             <div class="position-relative d-flex align-items-center justify-content-center">
                 <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Review</h1>
@@ -262,14 +273,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Testimonial End -->
 
     <!-- Contact Start -->
     <div class="container-fluid py-5" id="contact">
         <div class="container">
             <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Contact</h1>
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">&nbsp;</h1>
+                {{-- <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Contact</h1> --}}
                 <h1 class="position-absolute text-uppercase text-primary">Contact Me</h1>
             </div>
             <div class="row justify-content-center">
@@ -286,25 +298,26 @@
                             <div class="form-row">
                                 <div class="control-group col-sm-6">
                                     <input type="text" class="form-control p-4" id="name" placeholder="Your Name"
-                                        required name="name" value="{{old('name')}}"/>
+                                        required name="name" value="{{old('name')}}" minlength="4" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="control-group col-sm-6">
                                     <input type="email" class="form-control p-4" id="email" placeholder="Your Email" value="{{old('email')}}"
-                                        required name="email" />
+                                        required name="email"  />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <input type="text" class="form-control p-4" id="subject" placeholder="Subject" value="{{old('subject_mail')}}"
-                                    required name="subject_mail"/>
+                                    required name="subject_mail" minlength="4"/>
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
                                 <textarea class="form-control py-3 px-4" rows="5" id="message" placeholder="Message" name="content"
-                                    required>{{old('content')}}</textarea>
+                                    required minlength="10">{{old('content')}}</textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
+                            <div class="h-captcha" data-sitekey="79b093ea-9f8e-48e0-b40e-fcb67ae6f2ec"></div>
                             <div>
                                 <button class="btn btn-outline-primary" type="submit" id="sendMessageButton">Send
                                     Message</button>
